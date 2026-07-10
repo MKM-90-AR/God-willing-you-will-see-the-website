@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل الهواتف - مخصص لبيان</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* تنسيقات الأقسام المخصصة لكل هاتف */
+        .section-honor {
+            background: linear-gradient(to bottom, #faf5ff, #ffffff);
+            border-top: 8px solid #d8b4fe;
+        }
+        .section-realme12 {
+            background: linear-gradient(to bottom, #eff6ff, #ffffff);
+            border-top: 8px solid #3b82f6;
+        }
+        .section-realme13 {
+            background: linear-gradient(to bottom, #ecfdf5, #ffffff);
+            border-top: 8px solid #10b981;
+        }
+        .section-poco {
+            background: linear-gradient(to bottom, #f8fafc, #ffffff);
+            border-top: 8px solid #eab308;
+        }
+
+        /* مربعات التفاصيل الدقيقة (مع خلفية بيضاء صلبة لمنع التداخل) */
+        .spec-box {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #f1f5f9;
+            height: 100%;
+            position: relative;
+            z-index: 10; /* عشان الكلام يطلع فوق الصورة وهي بتختفي */
+        }
+        .spec-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .spec-title {
+            font-weight: 800;
+            font-size: 1.35rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .highlight-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* تنسيق الصورة وحركتها */
+        .phone-hero-img-container {
+            /* تعديل مهم: تم تقليل z-index عشان النص يمر من فوق الصورة بأمان */
+            z-index: 0; 
+        }
+        .phone-hero-img {
+            transform-origin: top center;
+            will-change: transform, opacity;
+            transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+        }
+
+        /* زر "عرض صورة الهاتف" العائم */
+        .fab-btn {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(120px);
+            opacity: 0;
+            pointer-events: none;
+            background: #1e293b;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid #334155;
+            white-space: nowrap;
+        }
+        .fab-btn.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .fab-btn:active {
+            transform: translateX(-50%) scale(0.95);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="max-w-4xl mx-auto text-center py-16 px-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-6 tracking-tight">الدليل الشامل والمفصل لبيان 📱✨</h1>
+        <p class="text-xl text-slate-600 leading-relaxed font-medium">
+            يا هلا بيان! بناءً على طلبك، هون رح تلاقي "التفصيل الممل الدقيق".
+            كل هاتف مشروح قطعة قطعة (المعالج، كرت الشاشة، دقة التصنيع، الرامات، ومقاومة المي).
+           
+        </p>
+    </header>
+
+    <main class="space-y-0 pb-32">
+
+        <section id="honor-sec" class="phone-section section-honor py-16 px-4 relative">
+            <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 items-start relative">
+                
+                <!-- صورة الهاتف (مثبتة وتتحرك برمجياً) -->
+                <div class="w-full lg:w-1/3 lg:sticky lg:top-12 phone-hero-img-container">
+                    <div class="phone-hero-img text-center">
+                        <img src="https://cdn.shortpixel.ai/spai/q_glossy+ret_img+to_webp/mobizil.com/wp-content/uploads/2024/07/Honor-200.jpg" alt="Honor 200" class="w-full max-w-[300px] mx-auto rounded-[2.5rem] shadow-2xl object-cover border-4 border-white">
+                        <div class="mt-6">
+                            <h2 class="text-4xl font-black text-purple-900 mb-3">Honor 200</h2>
+                            <span class="highlight-badge bg-purple-100 text-purple-800 border border-purple-200">📸 استديو التصوير المتنقل</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- تفاصيل الهاتف -->
+                <div class="w-full lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10 pt-4 lg:pt-0">
+                    
+                    <div class="spec-box border-purple-100">
+                        <div class="spec-title text-purple-800">⚙️ الماتور وكرت الشاشة (المعالج)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>المعالج:</strong> شوفي يا بيان، التلفون بيجي بمعالج من شركة كوالكوم اسمه (Snapdragon 7 Gen 3). هاد معالج قوي جداً للفئة المتوسطة، بيفتحلك البرامج بسرعة طلقة.</p>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>دقة التصنيع:</strong> 4 نانو متر. (يعني التلفون ما بصرف بطارية كثير، والأهم إنه ما بحمى وبصير نار بإيدك لما تشتغلي عليه فترة طويلة).</p>
+                        <p class="text-slate-700 text-[15px]"><strong>كرت الشاشة:</strong> اسمه (Adreno 720). هاد القطعة المسؤولة عن الألعاب وألوان الشاشة، بعطيكي أداء سلس جداً لو نويتي تلعبي ألعاب عليه.</p>
+                    </div>
+
+                    <div class="spec-box border-purple-100">
+                        <div class="spec-title text-purple-800">💾 المساحة والرامات (التخزين)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>النسخ المتوفرة إلك:</strong></p>
+                        <ul class="text-slate-700 text-[15px] list-disc list-inside mb-3 space-y-1">
+                            <li>مساحة 256 جيجا مع 12 جيجا رام (الرام هو الطاولة اللي بتشتغلي عليها، 12 ممتاز جداً ليخلي التلفون ما يعلق).</li>
+                            <li>مساحة 512 جيجا مع 12 جيجا رام.</li>
+                            <li>مساحة 512 جيجا مع 16 جيجا رام (أعلى نسخة).</li>
+                        </ul>
+                        <p class="text-slate-700 text-[15px] font-bold text-red-600">التلفون ما بدعم تركيب ميموري كارد خارجي، فبدك تختاري المساحة اللي بتكفيكي من البداية.</p>
+                    </div>
+
+                    <div class="spec-box border-purple-100">
+                        <div class="spec-title text-purple-800">📱 الشاشة (العرض)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>النوع والحجم:</strong> شاشة OLED منحنية من الأطراف (بتعطي شكل فخم جداً) بحجم 6.7 بوصة.</p>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>الدقة والتردد:</strong> دقتها 1.5K (فائقة الوضوح للتفاصيل الدقيقة)، وتردد 120Hz (يعني سريعة زي السكينة بالزبدة وانتي بتعملي سكرول بالبرامج).</p>
+                        <p class="text-slate-700 text-[15px]"><strong>السطوع:</strong> بوصل 4000 شمعة! (يعني لو كنتي ماشية بالشمس الظهر، الشاشة رح تضل واضحة 100% بدون ما تضطري تغطيها بإيدك).</p>
+                    </div>
+
+                    <div class="spec-box border-purple-100">
+                        <div class="spec-title text-purple-800">👁️ العيون (الكاميرات الإبداعية)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>الخلفية 3 كاميرات:</strong> الأساسية 50 ميجا مع مثبت بصري (OIS) عشان لو إيدك رجت الصورة ما تغبّش. وعدسة 50 ميجا مخصصة للبورتريه (متعاونين فيها مع استديو فرنسي اسمه Harcourt ليطلعلك صور زي صور المجلات بضبط الإضاءة). وعدسة 12 ميجا للتصوير الواسع.</p>
+                        <p class="text-slate-700 text-[15px]"><strong>الأمامية (السيلفي):</strong> 50 ميجا بيكسل بتصور 4K! يعني سيلفي خرافي ومليان تفاصيل إلك ولصحباتك.</p>
+                    </div>
+
+                    <div class="spec-box border-purple-100">
+                        <div class="spec-title text-purple-800">🔋 خزان البنزين (البطارية)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>السعة:</strong> 5200 مللي أمبير. حجم ضخم بكفيكي يوم كامل من الشغل براحة.</p>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>سرعة الشحن:</strong> بدعم الشحن السريع بقوة 100 واط (يعني بشحن من الصفر للـ 100% بأقل من ساعة!).</p>
+                        <p class="text-slate-700 text-[15px]"><strong>شحن عكسي:</strong> بدعم الشحن العكسي بقوة 5 واط (يعني بتقدري تشبكي فيه تلفون ثاني أو سماعتك وتشحنيهم من بطارية تلفونك). بس ما فيه شحن لاسلكي.</p>
+                    </div>
+
+                    <div class="spec-box border-purple-100">
+                        <div class="spec-title text-purple-800">🛠️ تقنيات وتفاصيل مهمة</div>
+                        <ul class="text-slate-700 text-[15px] space-y-2 list-disc list-inside">
+                            <li><strong>تقنية الدفع (NFC):</strong> بدعمها! بتقدري تحطي بطاقتك البنكية عالتلفون، وتدفعي بالمولات بس بتمرير التلفون عالماكينة.</li>
+                            <li><strong>مقاومة المي (IP65):</strong> بقاوم الغبار و"طرطشة" المي. (يعني لو انكب عليه كاسة مي، أو نزلتي فيه تحت المطر ما بصيرله إشي. بس ممنوع تغطسيه جوا المسبح!).</li>
+                            <li><strong>البصمة والصوت:</strong> البصمة تحت الشاشة سريعة جداً. والصوت (ستيريو) بيطلع من السماعتين فوق وتحت.</li>
+                            <li><strong>المنافذ:</strong> ما فيه منفذ السماعات السلكية القديمة (3.5 ملم).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="realme12-sec" class="phone-section section-realme12 py-16 px-4 relative">
+            <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 items-start relative">
+                
+                <div class="w-full lg:w-1/3 lg:sticky lg:top-12 phone-hero-img-container">
+                    <div class="phone-hero-img text-center">
+                        <img src="https://cdn.shortpixel.ai/spai/q_glossy+ret_img+to_webp/mobizil.com/wp-content/uploads/2024/02/realme12-pro-plus.jpg" alt="Realme 12 Pro+" class="w-full max-w-[300px] mx-auto rounded-[2.5rem] shadow-2xl object-cover border-4 border-slate-100">
+                        <div class="mt-6">
+                            <h2 class="text-4xl font-black text-blue-900 mb-3">Realme 12 Pro+ 5G</h2>
+                            <span class="highlight-badge bg-blue-100 text-blue-800 border border-blue-200">🕰️ الفخامة وعدسة الزووم</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10 pt-4 lg:pt-0">
+                    
+                    <div class="spec-box border-blue-100">
+                        <div class="spec-title text-blue-800">⚙️ الماتور وكرت الشاشة (المعالج)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>المعالج:</strong> كوالكوم (Snapdragon 7s Gen 2). هاد الماتور بنعتبره "متوسط"، ممتاز جداً للتطبيقات العادية والتصفح، بس مش أقوى إشي إذا بتضغطي التلفون كثير.</p>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>دقة التصنيع:</strong> 4 نانو متر (استهلاك ممتاز للبطارية وحرارة قليلة).</p>
+                        <p class="text-slate-700 text-[15px]"><strong>كرت الشاشة:</strong> (Adreno 710). بشغل الألعاب بشكل جيد جداً، بس مش على أعلى إعدادات جرافيك.</p>
+                    </div>
+
+                    <div class="spec-box border-blue-100">
+                        <div class="spec-title text-blue-800">💾 المساحة والرامات (التخزين)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>النسخ المتوفرة:</strong></p>
+                        <ul class="text-slate-700 text-[15px] list-disc list-inside mb-3 space-y-1">
+                            <li>مساحة 256 جيجا مع 8 جيجا رام (النسخة العادية).</li>
+                            <li>مساحة 256 جيجا مع 12 جيجا رام.</li>
+                            <li>مساحة 512 جيجا مع 12 جيجا رام.</li>
+                        </ul>
+                        <p class="text-slate-700 text-[15px] font-bold text-red-600">برضه هاد التلفون ما بدعم تركيب ميموري كارد لزيادة المساحة.</p>
+                    </div>
+
+                    <div class="spec-box border-blue-100">
+                        <div class="spec-title text-blue-800">📱 الشاشة (العرض)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>النوع والحجم:</strong> شاشة AMOLED منحنية الأطراف (بتعطي إحساس غالي) بحجم 6.7 بوصة.</p>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>الدقة والتردد:</strong> دقتها FHD+ (دقة ممتازة بس الـ Honor أدق)، وتردد 120Hz.</p>
+                        <p class="text-slate-700 text-[15px]"><strong>السطوع:</strong> السطوع الأقصى 950 شمعة بس. (يعني تحت الشمس القوية رح تشوفي الشاشة، بس مش بوضوح وسطوع الـ Honor، ممكن تحتاجي تغطيها شوي بإيدك).</p>
+                    </div>
+
+                    <div class="spec-box border-blue-100">
+                        <div class="spec-title text-blue-800">👁️ العيون (الزوم الخرافي)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>الخلفية 3 كاميرات:</strong> الأساسية 50 ميجا (حساس ممتاز من سوني IMX890 مع مثبت بصري). الميزة الأقوى هي <strong>عدسة البيريسكوب للزوم</strong> بدقة 64 ميجا! بتعمل تقريب حقيقي 3X بدون ما تخسر أي تفصيل، وتقريب ديجيتال لحد 120X! والثالثة 8 ميجا للواسع.</p>
+                        <p class="text-slate-700 text-[15px]"><strong>الأمامية:</strong> 32 ميجا بيكسل. أداءها جيد جداً بس الـ Honor بتفوق عليها.</p>
+                    </div>
+
+                    <div class="spec-box border-blue-100">
+                        <div class="spec-title text-blue-800">🔋 خزان البنزين (البطارية)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>السعة:</strong> 5000 مللي أمبير.</p>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>سرعة الشحن:</strong> 67 واط. (الشركة بتقول إنه بشحن من 1% لـ 50% بـ 19 دقيقة بس، سرعة ممتازة ومريحة).</p>
+                        <p class="text-slate-700 text-[15px]"><strong>ملاحظة:</strong> ما فيه شحن لاسلكي.</p>
+                    </div>
+
+                    <div class="spec-box border-blue-100">
+                        <div class="spec-title text-blue-800">🛠️ تقنيات وتصميم فخم</div>
+                        <ul class="text-slate-700 text-[15px] space-y-2 list-disc list-inside">
+                            <li><strong>التصميم:</strong> يا بيان، هاد التلفون بشبه الساعات السويسرية، ظهره من الجلد الفخم وتصميم الكاميرات دائري أنيق جداً (مصمم ساعات رولكس شارك بتصميمه).</li>
+                            <li><strong>تقنية الدفع (NFC):</strong> بدعمها 100%.</li>
+                            <li><strong>مقاومة المي (IP65):</strong> زي الـ Honor، بقاوم المطر والطرطشة، بس مش للغطس الكامل.</li>
+                            <li><strong>إضافات:</strong> بصمة تحت الشاشة، صوت ستيريو عالي، وبدون مدخل سماعات السلك.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="realme13-sec" class="phone-section section-realme13 py-16 px-4 relative">
+            <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 items-start relative">
+                
+                <div class="w-full lg:w-1/3 lg:sticky lg:top-12 phone-hero-img-container">
+                    <div class="phone-hero-img text-center">
+                        <img src="https://cdn.shortpixel.ai/spai/q_glossy+ret_img+to_webp/mobizil.com/wp-content/uploads/2024/08/Realme-13-Pro-Plus.jpg" alt="Realme 13 Pro+" class="w-full max-w-[300px] mx-auto rounded-[2.5rem] shadow-2xl object-cover border-4 border-white">
+                        <div class="mt-6">
+                            <h2 class="text-4xl font-black text-emerald-900 mb-3">Realme 13 Pro+ 5G</h2>
+                            <span class="highlight-badge bg-emerald-100 text-emerald-800 border border-emerald-200">✨ الجيل الجديد والذكاء الاصطناعي</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10 pt-4 lg:pt-0">
+                    
+                    <div class="spec-box border-emerald-100">
+                        <div class="spec-title text-emerald-800">⚙️ الماتور وكرت الشاشة (صدمة!)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>المعالج:</strong> الشركة هون وفرت مصاري! حطوا نفس معالج الجيل القديم بالزبط (Snapdragon 7s Gen 2) بتكنولوجيا 4 نانو متر.</p>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>كرت الشاشة:</strong> (Adreno 710).</p>
+                        <p class="text-slate-700 text-[15px] font-bold text-red-600">الخلاصة: كأنهم مسكوا ماتور تلفون ريلمي 12 وحطوه بالـ 13 بدون أي زيادة بالسرعة أو الأداء!</p>
+                    </div>
+
+                    <div class="spec-box border-emerald-100">
+                        <div class="spec-title text-emerald-800">💾 المساحة والرامات (التخزين)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>النسخ المتوفرة:</strong></p>
+                        <ul class="text-slate-700 text-[15px] list-disc list-inside mb-3 space-y-1">
+                            <li>مساحة 256 جيجا مع 8 جيجا رام.</li>
+                            <li>مساحة 256 جيجا مع 12 جيجا رام.</li>
+                            <li>مساحة 512 جيجا مع 12 جيجا رام.</li>
+                        </ul>
+                        <p class="text-slate-700 text-[15px] font-bold text-red-600">ما في إمكانية تركبي ميموري كارد إضافي.</p>
+                    </div>
+
+                    <div class="spec-box border-emerald-100">
+                        <div class="spec-title text-emerald-800">📱 الشاشة (التطور الحقيقي)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>النوع والحجم:</strong> شاشة AMOLED منحنية 6.7 بوصة بتردد 120Hz.</p>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>السطوع:</strong> هون صار التطور عن الجيل الماضي! السطوع وصل لـ 2000 شمعة (يعني الشاشة ممتازة وواضحة جداً تحت شمس الأردن القوية).</p>
+                        <p class="text-slate-700 text-[15px]"><strong>الحماية المتينة:</strong> حطوا عليها طبقة زجاج قوية جداً اسمها (Gorilla Glass 7i). يعني لو وقع منك التلفون عالأرض، نسبة إنه ينكسر أقل بكثير من التلفونات العادية.</p>
+                    </div>
+
+                    <div class="spec-box border-emerald-100">
+                        <div class="spec-title text-emerald-800">👁️ العيون والذكاء الاصطناعي (AI)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>الخلفية 3 كاميرات:</strong> 50 ميجا أساسية (حساس سوني جديد LYT-701) مع مثبت بصري. وعدسة بيريسكوب للزوم 50 ميجا بتعطي تقريب حقيقي 3X. وعدسة 8 ميجا للواسع.</p>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>الأمامية:</strong> 32 ميجا بيكسل.</p>
+                        <p class="text-slate-700 text-[15px] font-bold text-emerald-600">ميزة خرافية إلك: التلفون مليان ميزات ذكاء اصطناعي للصور. يعني لو تصورتي وطلع شخص ماشي وراكي مخرب الصورة، بلمسة وحدة التلفون بمسحه وبرسم الخلفية مكانه ولا كأنه كان موجود!</p>
+                    </div>
+
+                    <div class="spec-box border-emerald-100">
+                        <div class="spec-title text-emerald-800">🔋 خزان البنزين (البطارية)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>السعة:</strong> كبروها شوي صارت 5200 مللي أمبير.</p>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>سرعة الشحن:</strong> زادوها وصارت 80 واط. (بشحن من 1 لـ 50% بـ 19 دقيقة).</p>
+                        <p class="text-slate-700 text-[15px]">ما بدعم الشحن اللاسلكي.</p>
+                    </div>
+
+                    <div class="spec-box border-emerald-100">
+                        <div class="spec-title text-emerald-800">🛠️ تقنيات وتفاصيل مهمة</div>
+                        <ul class="text-slate-700 text-[15px] space-y-2 list-disc list-inside">
+                            <li><strong>التصميم:</strong> بيجي بنسخة ظهرها زجاج (لامع)، ونسخة ظهرها جلد. الميزة إنه إطاره محمي بتقنية (Armor Shell) عشان يتحمل الصدمات والوقعات أحسن.</li>
+                            <li><strong>تقنية الدفع (NFC):</strong> موجودة.</li>
+                            <li><strong>مقاومة المي (IP65):</strong> مقاوم للغبار ورذاذ المي (أمن جداً لو طرطش عليه مي من المغسلة أو المطر).</li>
+                            <li><strong>إضافات:</strong> بصمة تحت الشاشة، صوت مجسم ستيريو، وبدون مدخل 3.5 ملم للسماعات.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="poco-sec" class="phone-section section-poco py-16 px-4 relative">
+            <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 items-start relative">
+                
+                <div class="w-full lg:w-1/3 lg:sticky lg:top-12 phone-hero-img-container">
+                    <div class="phone-hero-img text-center">
+                        <img src="https://cdn.shortpixel.ai/spai/q_glossy+ret_img+to_webp/mobizil.com/wp-content/uploads/2024/05/Xiaomi-Poco-F6-Pro-2.jpg" alt="POCO F6 Pro" class="w-full max-w-[300px] mx-auto rounded-[2.5rem] shadow-2xl object-cover border-4 border-slate-200">
+                        <div class="mt-6">
+                            <h2 class="text-4xl font-black text-slate-900 mb-3">POCO F6 Pro</h2>
+                            <span class="highlight-badge bg-yellow-100 text-yellow-800 border border-yellow-200">🏎️ وحش الأداء وسرعة الشحن الخيالية</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10 pt-4 lg:pt-0">
+                    
+                    <div class="spec-box border-yellow-200">
+                        <div class="spec-title text-slate-800">⚙️ الماتور الجبار وكرت الشاشة</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>المعالج:</strong> يا بيان، هاد التلفون ما بمزح! معالجه (Snapdragon 8 Gen 2). هاد الماتور كان السنة الماضية بينزل بأغلى التلفونات بالعالم اللي سعرها فوق الألف دينار! أقوى معالج بهالمجموعة كلها بفرق شاسع جداً.</p>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>دقة التصنيع:</strong> 4 نانو متر (سرعة طيران وحرارة مسيطر عليها).</p>
+                        <p class="text-slate-700 text-[15px]"><strong>كرت الشاشة:</strong> (Adreno 740). إذا بتلعبي ألعاب ثقيلة زي ببجي على أعلى فريمات وأعلى إعدادات، هاد التلفون بشغلها زي الطلقة بدون ما يرمش.</p>
+                    </div>
+
+                    <div class="spec-box border-yellow-200">
+                        <div class="spec-title text-slate-800">💾 المساحة والرامات (أحدث تكنولوجيا)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>النسخ المتوفرة (خيالية):</strong></p>
+                        <ul class="text-slate-700 text-[15px] list-disc list-inside mb-3 space-y-1">
+                            <li>مساحة 256 جيجا مع 12 جيجا رام.</li>
+                            <li>مساحة 512 جيجا مع 12 جيجا رام.</li>
+                            <li>مساحة 1 تيرا (1000 جيجا!) مع 16 جيجا رام!</li>
+                        </ul>
+                        <p class="text-slate-700 text-[15px] font-bold text-yellow-700">نوع التخزين هون (UFS 4.0)، هاد أسرع نوع تخزين موجود حالياً بالعالم لنقل الملفات وفتح التطبيقات. (طبعاً ما بدعم ميموري كارد).</p>
+                    </div>
+
+                    <div class="spec-box border-yellow-200">
+                        <div class="spec-title text-slate-800">📱 الشاشة (دقة خرافية ومسطحة)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>النوع والحجم:</strong> شاشة AMOLED <strong>مسطحة ومش منحنية</strong> حجمها 6.67 بوصة بتردد 120Hz. (كثير ناس بحبوها مسطحة عشان اللعب والشغل أسهل ومريحة لتركيب لزقة حماية).</p>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>الدقة:</strong> دقتها 2K (WQHD+). الشاشة هاي أدق وأصفى شاشة بين الأربعة كلهم!</p>
+                        <p class="text-slate-700 text-[15px]"><strong>السطوع:</strong> 4000 شمعة، شاشة مذهلة للعين وبدعم تقنيات للأفلام زي Dolby Vision.</p>
+                    </div>
+
+                    <div class="spec-box border-yellow-200">
+                        <div class="spec-title text-slate-800">👁️ العيون (نقطة الضعف!)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>الكاميرات الخلفية:</strong> الأساسية 50 ميجا مع مثبت بصري، وعدسة 8 ميجا للواسع، وعدسة 2 ميجا للماكرو (الأشياء القريبة جداً).</p>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>الكاميرا الأمامية:</strong> 16 ميجا بيكسل فقط.</p>
+                        <p class="text-slate-700 text-[15px] font-bold text-red-600">الخلاصة الك يا بيان: الكاميرات بتمشي الحال، بس التلفون مش معمول للتصوير أبداً. إذا التصوير والسيلفي مهم إلك، ابعدي عنه.</p>
+                    </div>
+
+                    <div class="spec-box border-yellow-200">
+                        <div class="spec-title text-slate-800">⚡ الشحن الصاروخي (معجزة!)</div>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>سعة البطارية:</strong> 5000 مللي أمبير.</p>
+                        <p class="text-slate-700 text-[15px] mb-3"><strong>سرعة الشحن (السحر):</strong> الشاحن اللي بيجي بالكرتونة 120 واط! التلفون بشحن من صفر لـ 100% خلال 19 دقيقة بالزبط! (بتتوضي وبتصلي، بترجعي بتلاقي التلفون فلل وانتي لسا مش مستوعبة السرعة).</p>
+                        <p class="text-slate-700 text-[15px]">ما بدعم الشحن اللاسلكي.</p>
+                    </div>
+
+                    <div class="spec-box border-yellow-200">
+                        <div class="spec-title text-slate-800">🛠️ الخامات وتقنيات إضافية</div>
+                        <ul class="text-slate-700 text-[15px] space-y-2 list-disc list-inside">
+                            <li><strong>الخامات (البودي):</strong> فخم وصلب جداً، ظهره من الزجاج وإطاره من الألمنيوم الحقيقي (باقي الهواتف اللي فوق إطارها بلاستيك).</li>
+                            <li><strong>مقاومة المي (IP54):</strong> للأسف أضعف من الباقيين. هاد بس بقاوم رذاذ المي الخفيف جداً والعرق، لازم تديري بالك عليه كثير من المي.</li>
+                            <li><strong>تقنية الدفع (NFC):</strong> بدعمها طبعاً.</li>
+                            <li><strong>إضافات:</strong> بصمة تحت الشاشة، صوت ستيريو، وما فيه مدخل سماعات سلك.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <button id="fab-btn" class="fab-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+        عرض صورة الهاتف
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.phone-section');
+            const fab = document.getElementById('fab-btn');
+            let activeSectionForFab = null;
+
+            window.addEventListener('scroll', () => {
+                // تفعيل الحركة فقط على شاشات الموبايل والتابلت (أقل من 1024 بكسل)
+                let isMobile = window.innerWidth < 1024;
+                let isAnyImageHidden = false;
+
+                sections.forEach(sec => {
+                    const imgContainer = sec.querySelector('.phone-hero-img');
+                    const rect = sec.getBoundingClientRect();
+                    
+                    if (isMobile) {
+                        // إذا كان القسم موجوداً ضمن الشاشة
+                        if (rect.top <= 120 && rect.bottom >= 0) {
+                            
+                            // حساب مسافة النزول بدءاً من الحافة العلوية
+                            let scrolled = 120 - rect.top; 
+                            
+                            // تحويل المسافة إلى نسبة (من 0 إلى 1) على مسافة 350 بكسل
+                            let progress = Math.min(1, Math.max(0, scrolled / 350));
+                            
+                            // تصغير الصورة لغاية 60% وإخفائها تدريجياً
+                            const scale = 1 - (progress * 0.4); 
+                            const opacity = 1 - (progress * 1.8); // تتلاشى بسرعة أكبر
+                            
+                            imgContainer.style.transform = `scale(${scale})`;
+                            imgContainer.style.opacity = Math.max(0, opacity);
+
+                            // إذا اختفت الصورة تقريباً والقسم لا يزال يغطي الشاشة، نجهز الزر العائم
+                            if (progress > 0.6 && rect.bottom > window.innerHeight * 0.4) {
+                                isAnyImageHidden = true;
+                                activeSectionForFab = sec;
+                            }
+                        } else {
+                            // إعادة الصورة لحالتها الطبيعية إذا خرجت من الشاشة
+                            imgContainer.style.transform = `scale(1)`;
+                            imgContainer.style.opacity = 1;
+                        }
+                    } else {
+                        // على الكمبيوتر: لا يوجد تصغير أو إخفاء
+                        imgContainer.style.transform = `scale(1)`;
+                        imgContainer.style.opacity = 1;
+                    }
+                });
+
+                // إظهار أو إخفاء الزر العائم بناءً على حالة الصور
+                if (isAnyImageHidden) {
+                    fab.classList.add('show');
+                } else {
+                    fab.classList.remove('show');
+                }
+            });
+
+            // عند الضغط على الزر، نعود لأعلى القسم الذي نقرأ فيه
+            fab.addEventListener('click', () => {
+                if (activeSectionForFab) {
+                    // حساب المسافة بدقة مع ترك مساحة صغيرة فوق الصورة
+                    const y = activeSectionForFab.getBoundingClientRect().top + window.scrollY - 80;
+                    window.scrollTo({
+                        top: y,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
